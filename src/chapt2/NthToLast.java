@@ -22,6 +22,7 @@ public class NthToLast {
 		ll.appendNode(21);
 		System.out.println(ll.toString());
 		System.out.println(ll.nToLast(3));
+		System.out.println(ll.nToLastIterative(3));
 	}
 	
 	protected static class SingleLinkedList<E> {
@@ -55,20 +56,52 @@ public class NthToLast {
 		 * That's not tricky at all, in the following solutions, we'll 
 		 * remove this assumption.
 		 * 
+		 * Due to the current code, this lead to time complexity O(N)
+		 * where N is the size of the LL. 
+		 * 
 		 * @param n
 		 * @return
 		 */
 		protected E nToLast(int n) {
+			//Checking not valid input
 			if(n > size)
 				return null;
 			if(n == size)
 				return head.el;
+			
 			int indexEl = n - size;
 			Node<E> cur = head;
 			for(int i = 0; i < indexEl; i++)
 				cur = cur.next;
 			return cur.el;
 			
+		}
+		/**
+		 * The idea for the following method is to consider no shortpath (i.e. the size)
+		 * 
+		 * The approach is to traverse the LL supposing each time that we are lucky enough 
+		 * that we are nth from the end. 
+		 * 
+		 * 
+		 * @param n
+		 * @return
+		 */
+		protected E nToLastIterative(int n) {
+			//Check not valid input
+			if(n > size)
+				return null;
+			if(n == size)
+				return head.el;
+			Node<E> lucky = head;
+			
+			while(true) {	//don't hate me for this :) //Assuming there is no infinite list :)
+				Node<E> curNode = lucky;
+				for(int i = 0; i < n; i++)
+					curNode = curNode.next;
+				if (curNode == null)
+					return lucky.el;
+				lucky = lucky.next; 
+			}
 		}
 		
 
