@@ -1,5 +1,6 @@
 package chapt2;
 
+import chapt2.RemoveDupULL.UnsortedLinkedList;
 import chapt2.RemoveDupULL.UnsortedLinkedList.Node;
 
 /**
@@ -10,10 +11,20 @@ import chapt2.RemoveDupULL.UnsortedLinkedList.Node;
  */
 public class NthToLast {
 	public static void main(String[] args){
-		
+		SingleLinkedList<Integer> ll = new SingleLinkedList<>();
+		ll.appendNode(2);
+		ll.appendNode(20);
+		ll.appendNode(1);
+		ll.appendNode(10);
+		ll.appendNode(10);	
+		ll.appendNode(2);
+		ll.appendNode(20);
+		ll.appendNode(21);
+		System.out.println(ll.toString());
+		System.out.println(ll.nToLast(3));
 	}
 	
-	protected class SingleLinkedList<E> {
+	protected static class SingleLinkedList<E> {
 		protected class Node<E> {
 			E el;
 			Node<E> next = null;
@@ -39,14 +50,37 @@ public class NthToLast {
 			}
 			size++;
 		}
+		/**
+		 * This version supposes that I can use the size of the LL.
+		 * That's not tricky at all, in the following solutions, we'll 
+		 * remove this assumption.
+		 * 
+		 * @param n
+		 * @return
+		 */
 		protected E nToLast(int n) {
 			if(n > size)
 				return null;
 			if(n == size)
 				return head.el;
+			int indexEl = n - size;
+			Node<E> cur = head;
+			for(int i = 0; i < indexEl; i++)
+				cur = cur.next;
+			return cur.el;
 			
-			return null;
-			
+		}
+		
+
+		//Adding toString() for testing purposes
+		public String toString(){ //As before, the obj should implement toString if custom
+			String out = "";
+			Node<E> cur = head;
+			while(cur != null) {
+				out += cur.el+ " ";
+				cur = cur.next;
+			}
+			return out;
 		}
 		
 	}
