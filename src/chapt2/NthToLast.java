@@ -82,6 +82,7 @@ public class NthToLast {
 		 * The approach is to traverse the LL supposing each time that we are lucky enough 
 		 * that we are nth from the end. 
 		 * 
+		 * this method takes O(N^2) where N is the LL size.
 		 * 
 		 * @param n
 		 * @return
@@ -103,7 +104,6 @@ public class NthToLast {
 				lucky = lucky.next; 
 			}
 		}
-		
 
 		//Adding toString() for testing purposes
 		public String toString(){ //As before, the obj should implement toString if custom
