@@ -9,5 +9,9 @@ package chapt9;
  *
  */
 public class SortedAnagrams {
-
+	public static void main(String[] args) {
+		
+	}
+	
+	
 }
